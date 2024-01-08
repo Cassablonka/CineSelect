@@ -1,10 +1,9 @@
-import React from 'react'
+import { RouterProvider } from "react-router-dom"
+import { appRoutes } from "./routes"
 
 const App = () => {
   return (
-    <div className='bg-slate-400'>
-      Welcome to React !
-    </div>
+    <RouterProvider router={appRoutes} />
   )
 }
 
