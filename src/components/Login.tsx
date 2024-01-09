@@ -1,9 +1,13 @@
 import { useRef, useState } from 'react'
 import { validateFields } from '../utils'
+import { useTranslation } from 'react-i18next';
+
 
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true)
   const [errMessage, setErrMessage] = useState('')
+  const { t } = useTranslation();
+
   const handleSignUp = () => {
     setIsSignedIn(!isSignedIn)
   }
@@ -28,14 +32,14 @@ const Login = () => {
         />
       </div>
       <div className="absolute bg-gradient-to-b from-black">
-        <h1 className="p-7 opacity-100 text-red-600 text-4xl font-bold font-sans subpixel-antialiased tracking-wider">
+        <h1 className="p-7 opacity-100 text-red-500 text-4xl font-bold font-sans subpixel-antialiased tracking-wider">
           CINESELECT
         </h1>
       </div>
       <div className="absolute w-1/4 mx-auto left-0 right-0 my-32 bg-black py-8 px-12 rounded-md bg-opacity-80">
         <form action="">
           <h1 className="text-white text-4xl my-5">
-            {isSignedIn ? 'Sign In' : 'Sign Up'}
+            {isSignedIn ? t('main') : 'Sign Up'}
           </h1>
           {!isSignedIn && (
             <input
@@ -62,11 +66,11 @@ const Login = () => {
             onClick={handleLoginClick}
             className="w-full bg-red-600 text-white my-8 p-2 text-lg rounded-md"
           >
-            {isSignedIn ? 'Sign In' : 'Sign Up'}
+            {isSignedIn ? t('main') : 'Sign Up'}
           </button>
           {isSignedIn ? (
             <p className="text-zinc-400 mt-4">
-              New to CineSelect ?{' '}
+              New to CineSelect ? {" "}
               <span
                 className="text-white cursor-pointer hover:underline"
                 onClick={handleSignUp}
@@ -75,8 +79,8 @@ const Login = () => {
               </span>
             </p>
           ) : (
-            <p className="text-zinc-400 mt-4">
-              Already registered ?{' '}
+            <p className="text-zinc-400 mt-4 px-2">
+              Already registered ? {' '}
               <span
                 className="text-white cursor-pointer hover:underline"
                 onClick={handleSignUp}
@@ -85,6 +89,7 @@ const Login = () => {
               </span>
             </p>
           )}
+          <p className='text-zinc-400 text-sm mt-3'>Transforming Moments into Memories, One Stream at a Time.</p>
         </form>
       </div>
     </>
