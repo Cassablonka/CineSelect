@@ -23,6 +23,7 @@ const Login = () => {
 
   let email = useRef<HTMLInputElement>(null)
   let password = useRef<HTMLInputElement>(null)
+  let displayName = useRef<HTMLInputElement>(null)
 
   const handleLoginClick = (e: React.FormEvent) => {
     e.preventDefault()
@@ -74,7 +75,7 @@ const Login = () => {
           alt=""
         />
       </div>
-      <Header />
+      <Header loginInfo={isSignedIn} />
       <div className="absolute w-1/4 mx-auto left-0 right-0 my-32 bg-black py-8 px-12 rounded-md bg-opacity-80">
         <form action="">
           <h1 className="text-white text-4xl my-5">
