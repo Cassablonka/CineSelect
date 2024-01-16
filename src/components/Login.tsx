@@ -1,23 +1,29 @@
 import { useRef, useState } from 'react'
 import { validateFields } from '../utils'
-import { useTranslation } from 'react-i18next';
-
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth'
+import { auth } from '../utils/firebase'
+import { useNavigate } from 'react-router-dom'
+import Header from './Header'
+import { useTranslation } from 'react-i18next'
 
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true)
   const [errMessage, setErrMessage] = useState('')
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation()
+
+  const navigate = useNavigate()
 
   const handleSignUp = () => {
     setIsSignedIn(!isSignedIn)
-  }
-
-  const handleLanguageChange = (e: any) => {
-    i18n.changeLanguage(e.target.value)
+    setErrMessage('')
   }
 
   let email = useRef<HTMLInputElement>(null)
   let password = useRef<HTMLInputElement>(null)
+
   const handleLoginClick = (e: React.FormEvent) => {
     e.preventDefault()
     const message = validateFields(
@@ -25,6 +31,39 @@ const Login = () => {
       password?.current?.value as string,
     )
     setErrMessage(message as string)
+    if (message) return
+
+    if (!isSignedIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email?.current?.value as string,
+        password.current?.value as string,
+      )
+        .then((userCredential) => {
+          const user = userCredential.user
+          navigate('/browse')
+        })
+        .catch((error) => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          setErrMessage(errorCode + '-' + errorMessage)
+        })
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email?.current?.value as string,
+        password.current?.value as string,
+      )
+        .then((userCredential) => {
+          const user = userCredential.user
+          navigate('/browse')
+        })
+        .catch((error) => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          setErrMessage(errorCode + '-' + errorMessage)
+        })
+    }
   }
   return (
     <>
@@ -35,27 +74,7 @@ const Login = () => {
           alt=""
         />
       </div>
-      <div className='flex'>
-      <div className="absolute bg-gradient-to-b from-black">
-        <h1 className="p-7 opacity-100 text-red-500 text-4xl font-bold font-sans subpixel-antialiased tracking-wider">
-          CINESELECT
-        </h1>
-      </div>
-        <div className='absolute right-0 py-6 px-20  text-white bg-gradient-to-b from-black'>
-          <div className='bg-red-700 rounded-md flex'>
-          <span className='font-bold pl-2.5 pr-1 py-2'>⎈</span>
-          <div className='px-2'>
-          <select className='py-1 pr-1.5 my-1.5 rounded-sm bg-red-700 font-semibold outline-none' onChange={(e) => handleLanguageChange(e)}>
-          <option value="en">English</option>
-          <option value="hi">हिंदी</option>
-          <option value="mr">मराठी</option>
-          <option value="kn">ಕನ್ನಡ</option>
-        </select>
-          </div>
-
-          </div>
-        </div>
-      </div>
+      <Header />
       <div className="absolute w-1/4 mx-auto left-0 right-0 my-32 bg-black py-8 px-12 rounded-md bg-opacity-80">
         <form action="">
           <h1 className="text-white text-4xl my-5">
@@ -90,7 +109,7 @@ const Login = () => {
           </button>
           {isSignedIn ? (
             <p className="text-zinc-400 mt-4">
-              New to CineSelect ? {" "}
+              New to CineSelect ?{' '}
               <span
                 className="text-white cursor-pointer hover:underline"
                 onClick={handleSignUp}
@@ -100,7 +119,7 @@ const Login = () => {
             </p>
           ) : (
             <p className="text-zinc-400 mt-4 px-2">
-              Already registered ? {' '}
+              Already registered ?{' '}
               <span
                 className="text-white cursor-pointer hover:underline"
                 onClick={handleSignUp}
@@ -109,7 +128,9 @@ const Login = () => {
               </span>
             </p>
           )}
-          <p className='text-zinc-400 text-sm mt-3'>Transforming Moments into Memories, One Stream at a Time.</p>
+          <p className="text-zinc-400 text-sm mt-3">
+            Transforming Moments into Memories, One Stream at a Time.
+          </p>
         </form>
       </div>
     </>

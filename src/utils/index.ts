@@ -8,7 +8,7 @@ export const validateFields = (e: string, p: string) => {
       p,
     )
   if (!passwordRegex) {
-    return 'Please enter valid password type'
+    return 'Your password must be min of 8 characters, with 1 uppercase, 1 special character and 1 number'
   }
   return null
 }
