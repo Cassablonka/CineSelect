@@ -1,3 +1,18 @@
 {
-  "main": "Andar Jao In"
+  "loginForm": {
+    "signIn": "साइन इन",
+    "signUp": "साइन अप",
+    "newUser": "Cineselect में नये हैं?",
+    "signUpButton": "साइन अप करें।",
+    "oldUser": "पहले से ही रैगिस्टार्ड हैं?",
+    "signInButton": "साइन इन करें।",
+    "tagline": "एक समय में एक फिल्म, लम्हों को यादों में बदलें।",
+    "email": "ईमेल पता डाले",
+    "password": "पासवर्ड डाले",
+    "name": "पूरा नाम डेल"
+  },
+  "searchGpt": {
+    "placeholder": "कौन सी फिल्में देखनी हैं?",
+    "searchBtn": "GPT सर्च करे"
+  }
 }

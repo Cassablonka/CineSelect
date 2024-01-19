@@ -5,7 +5,7 @@ export const OPTIONS = {
   headers: {
     accept: 'application/json',
     Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjZiYmEzNzU1ZWZkNzA0NGNjMTllZjYzNTFjNzY0MiIsInN1YiI6IjY1YTJkYzAzMjk3MzM4MDEyMTEyZjljNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XJFtxIX5oFhnA8ObszI6TXIK-yCsaRQpvuEZ91jFE_Q',
+      'Add your bearer token',
   },
 }
 
@@ -21,3 +21,5 @@ export const TOP_RATED_MOVIES_API =
 
 export const FUTURE_RELEASE =
   'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1'
+
+export const OPENAI_KEY = 'Enter your api key'

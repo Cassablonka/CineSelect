@@ -1,3 +1,18 @@
 {
-  "main": "Sign In"
+  "loginForm": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "newUser": "New to Cineselect ?",
+    "signUpButton": "Sign up now.",
+    "oldUser": "Already Registered ?",
+    "signInButton": "Sign ip now.",
+    "tagline": "Transforming Moments into Memories, One Stream at a Time.",
+    "email": "Email Address",
+    "password": "Password",
+    "name": "Full Name"
+  },
+  "searchGpt": {
+    "placeholder": "What movies to watch ?",
+    "searchBtn": "Search GPT"
+  }
 }
